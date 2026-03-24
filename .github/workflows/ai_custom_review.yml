@@ -11,7 +11,7 @@ on:
       - main
 
 jobs:
-  review:
+  custom-review:
     runs-on: ubuntu-latest
     steps:
       - name: Log in to Docker Hub
@@ -19,4 +19,7 @@ jobs:
         with:
           username: ${{ vars.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-    
+      - name: Pull and run custom review container
+        run: |
+          docker pull ${{ vars.DOCKER_USERNAME }}/custom-ai-review-image:latest
+          docker run --rm ${{ vars.DOCKER_USERNAME }}/custom-ai-review-image:latest

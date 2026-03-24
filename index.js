@@ -10,5 +10,5 @@ console.log("Using word2: ", word2);
 console.log(
   `Hello!!! 
   The ${chalk.redBright("random word")} of today is: ${chalk.bgRed(word)}. 
-  The word length is ${sum(word.length, 0)}.`
+  The word length is ${sum(word.length, 0)}.`,
 );

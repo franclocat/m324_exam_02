@@ -18,7 +18,7 @@ jobs:
   custom-review:
     runs-on: ubuntu-latest
     env:
-      IMAGE_NAME: ${{ vars.DOCKER_USERNAME }}/custom-ai-review-image:v1
+      IMAGE_NAME: ${{ vars.DOCKER_USERNAME }}/custom-ai-review-image:v2
       IMAGE_PLATFORM: linux/amd64
     steps:
       - name: Log in to Docker Hub

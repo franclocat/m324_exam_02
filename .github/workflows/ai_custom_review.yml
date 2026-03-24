@@ -1,0 +1,16 @@
+name: AI Custom Review
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+  push:
+    branches:
+      - main
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    

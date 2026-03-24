@@ -27,13 +27,15 @@ jobs:
           username: ${{ vars.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Pull and run custom review container
+        id: docker-run
         run: |
           docker pull --platform "$IMAGE_PLATFORM" "$IMAGE_NAME"
-          docker run --rm --platform "$IMAGE_PLATFORM" "$IMAGE_NAME"
+          DOCKER_OUTPUT=$(docker run --rm --platform "$IMAGE_PLATFORM" "$IMAGE_NAME")
+          echo "$DOCKER_OUTPUT"
+          echo "$DOCKER_OUTPUT" >> $GITHUB_OUTPUT
       - name: Comment PR
         if: github.event.pull_request != null
         uses: thollander/actions-comment-pull-request@v3
         with:
-          message: |
-            Hello!
+          message: ${{ steps.docker-run.outputs.output }}
           pr-number: ${{ github.event.pull_request.number }}

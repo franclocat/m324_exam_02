@@ -12,7 +12,6 @@ on:
 
 jobs:
   custom-review:
-    if: true
     runs-on: ubuntu-latest
     env:
       IMAGE_NAME: ${{ vars.DOCKER_USERNAME }}/custom-ai-review-image:v1
@@ -31,4 +30,5 @@ jobs:
         uses: thollander/actions-comment-pull-request@v3
         with:
           message: |
-            'Hello!'
+            Hello!
+          pr-number: ${{ github.event.pull_request.number }}

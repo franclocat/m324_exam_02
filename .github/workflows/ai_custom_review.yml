@@ -31,8 +31,9 @@ jobs:
         run: |
           docker pull --platform "$IMAGE_PLATFORM" "$IMAGE_NAME"
           DOCKER_OUTPUT=$(docker run --rm --platform "$IMAGE_PLATFORM" "$IMAGE_NAME")
-          echo "$DOCKER_OUTPUT"
+          echo "output<<EOF" >> $GITHUB_OUTPUT
           echo "$DOCKER_OUTPUT" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
       - name: Comment PR
         if: github.event.pull_request != null
         uses: thollander/actions-comment-pull-request@v3

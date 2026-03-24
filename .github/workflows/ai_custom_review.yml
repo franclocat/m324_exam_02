@@ -13,6 +13,9 @@ on:
 jobs:
   custom-review:
     runs-on: ubuntu-latest
+    env:
+      IMAGE_NAME: ${{ vars.DOCKER_USERNAME }}/custom-ai-review-image:v1
+      IMAGE_PLATFORM: linux/arm64
     steps:
       - name: Log in to Docker Hub
         uses: docker/login-action@v4
@@ -21,5 +24,5 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Pull and run custom review container
         run: |
-          docker pull ${{ vars.DOCKER_USERNAME }}/custom-ai-review-image:latest
-          docker run --rm ${{ vars.DOCKER_USERNAME }}/custom-ai-review-image:latest
+          docker pull --platform "$IMAGE_PLATFORM" "$IMAGE_NAME"
+          docker run --rm --platform "$IMAGE_PLATFORM" "$IMAGE_NAME"

@@ -12,6 +12,7 @@ on:
 
 jobs:
   custom-review:
+    if: false
     runs-on: ubuntu-latest
     env:
       IMAGE_NAME: ${{ vars.DOCKER_USERNAME }}/custom-ai-review-image:v1

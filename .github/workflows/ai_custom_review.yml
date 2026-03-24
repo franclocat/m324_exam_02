@@ -10,6 +10,10 @@ on:
     branches:
       - main
 
+permissions:
+  pull-requests: write
+  contents: read
+
 jobs:
   custom-review:
     runs-on: ubuntu-latest
@@ -27,9 +31,9 @@ jobs:
           docker pull --platform "$IMAGE_PLATFORM" "$IMAGE_NAME"
           docker run --rm --platform "$IMAGE_PLATFORM" "$IMAGE_NAME"
       - name: Comment PR
+        if: github.event.pull_request != null
         uses: thollander/actions-comment-pull-request@v3
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
           message: |
             Hello!
           pr-number: ${{ github.event.pull_request.number }}
